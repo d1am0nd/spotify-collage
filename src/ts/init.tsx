@@ -2,8 +2,8 @@ import {spotify} from '../env/services';
 const scope = 'user-top-read';
 
 const LOCAL_STORAGE_TOKEN = 'LOCAL_STORAGE_TOKEN';
-const HASH_TOKEN = 'access_token';
-const HASH_EXPIRES = 'expires_in';
+
+type HashParams = 'access_token' | 'expires_in';
 
 export const setLink = () => {
   const {protocol, hostname} = window.location;
@@ -16,12 +16,18 @@ export const setLink = () => {
   document
     .getElementById('spotify-login')
     .setAttribute('href', url);
+
+  document
+    .getElementById('spotify-login')
+    .style
+    .display = 'visible';
 };
 
 export const removeLink = () => {
   document
     .getElementById('spotify-login')
-    .remove();
+    .style
+    .display = 'none';
 };
 
 export interface IToken {
@@ -57,6 +63,7 @@ const getTokenFromStorage = (): IToken | undefined => {
   return parsed;
 };
 
+
 const getTokenFromHash = (): IToken | undefined => {
   // Get hash and remove #
   // should leave us with access_token=x&expires=y
@@ -73,21 +80,21 @@ const getTokenFromHash = (): IToken | undefined => {
     .filter((param) => (param.match(/=/g) || []).length === 1)
     .reduce((carry, param) => {
       const [key, val] = param.split('=');
-      carry.set(key, val);
+      carry.set(key as HashParams, val);
       return carry;
-    }, new Map<string, string>());
+    }, new Map<HashParams, string>());
 
   // If expected params are not found, return undefined
-  if (!params.has(HASH_TOKEN) || !params.has(HASH_EXPIRES)) return;
+  if (!params.has('access_token') || !params.has('expires_in')) return;
 
   const expiresDate = new Date();
   expiresDate.setSeconds(
-    new Date().getSeconds() + parseInt(params.get(HASH_TOKEN))
+    new Date().getSeconds() + parseInt(params.get('expires_in'))
   );
 
   // Make a token object from map
   const token = {
-    accessToken: params.get(HASH_TOKEN),
+    accessToken: params.get('access_token'),
     expires: expiresDate.toString(),
   };
 
