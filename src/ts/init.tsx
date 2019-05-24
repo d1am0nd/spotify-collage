@@ -20,14 +20,14 @@ export const setLink = () => {
   document
     .getElementById('spotify-login')
     .style
-    .display = 'visible';
+    .visibility = 'visible';
 };
 
 export const removeLink = () => {
   document
     .getElementById('spotify-login')
     .style
-    .display = 'none';
+    .visibility = 'hidden';
 };
 
 export interface IToken {
