@@ -6,17 +6,19 @@ const ID_SPOTIFY_LOGIN = 'spotify-login';
 type HashParamsType = 'access_token' | 'expires_in';
 type VisibilityType = 'visible' | 'hidden';
 
-export const setLink = () => {
+export const authLink = () => {
   const {protocol, hostname} = window.location;
-  const url = `https://accounts.spotify.com/authorize`
+  return `https://accounts.spotify.com/authorize`
     + `?client_id=${spotify.clientId}`
     + `&response_type=token`
     + `&redirect_uri=${protocol}//${hostname}/`
     + `&scope=${spotify.scope}`;
+};
 
+export const setLink = () => {
   document
     .getElementById(ID_SPOTIFY_LOGIN)
-    .setAttribute('href', url);
+    .setAttribute('href', authLink());
 
   setLinkVisiblity('hidden');
 };

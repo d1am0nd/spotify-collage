@@ -1,13 +1,13 @@
 import axios, {AxiosPromise} from 'axios';
 import {IToken} from './init';
 
-interface IImage {
+export interface IImage {
   height: number;
   url: string;
   width: number;
 };
 
-interface IArtist {
+export interface IArtist {
   external_urls: Object;
   followers: {href?: string, total: number},
   genres: Array<string>;
@@ -20,7 +20,7 @@ interface IArtist {
   uri: string;
 }
 
-interface IGetTopResults {
+export interface IGetTopResults {
   href: string;
   items: Array<IArtist>;
   next?: string;
@@ -29,14 +29,14 @@ interface IGetTopResults {
   tota: number;
 };
 
-export const getTop = (token: IToken, count: number): AxiosPromise<IGetTopResults> => axios.get(
+export const getTop = ({accessToken}: IToken, limit: number): AxiosPromise<IGetTopResults> => axios.get(
   'https://api.spotify.com/v1/me/top/artists',
   {
     headers: {
-      Authorization: `Bearer ${token.accessToken}`,
+      Authorization: `Bearer ${accessToken}`,
     },
     params: {
-      limit: count,
+      limit,
       time_range: 'short_term',
     },
   }
