@@ -1,9 +1,10 @@
 import {spotify} from '../env/services';
-const scope = 'user-top-read';
 
 const LOCAL_STORAGE_TOKEN = 'LOCAL_STORAGE_TOKEN';
+const ID_SPOTIFY_LOGIN = 'spotify-login';
 
-type HashParams = 'access_token' | 'expires_in';
+type HashParamsType = 'access_token' | 'expires_in';
+type VisibilityType = 'visible' | 'hidden';
 
 export const setLink = () => {
   const {protocol, hostname} = window.location;
@@ -11,23 +12,20 @@ export const setLink = () => {
     + `?client_id=${spotify.clientId}`
     + `&response_type=token`
     + `&redirect_uri=${protocol}//${hostname}/`
-    + `&scope=${scope}`;
+    + `&scope=${spotify.scope}`;
 
   document
-    .getElementById('spotify-login')
+    .getElementById(ID_SPOTIFY_LOGIN)
     .setAttribute('href', url);
 
-  document
-    .getElementById('spotify-login')
-    .style
-    .visibility = 'visible';
+  setLinkVisiblity('hidden');
 };
 
-export const removeLink = () => {
+export const setLinkVisiblity = (visibility: VisibilityType) => {
   document
-    .getElementById('spotify-login')
+    .getElementById(ID_SPOTIFY_LOGIN)
     .style
-    .visibility = 'hidden';
+    .visibility = visibility;
 };
 
 export interface IToken {
@@ -80,9 +78,9 @@ const getTokenFromHash = (): IToken | undefined => {
     .filter((param) => (param.match(/=/g) || []).length === 1)
     .reduce((carry, param) => {
       const [key, val] = param.split('=');
-      carry.set(key as HashParams, val);
+      carry.set(key as HashParamsType, val);
       return carry;
-    }, new Map<HashParams, string>());
+    }, new Map<HashParamsType, string>());
 
   // If expected params are not found, return undefined
   if (!params.has('access_token') || !params.has('expires_in')) return;

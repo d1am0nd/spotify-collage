@@ -1,8 +1,7 @@
 import {getTop} from './api';
 import {
   removeTokenFromStorage,
-  setLink,
-  removeLink,
+  setLinkVisiblity,
   getToken,
   IToken,
 } from './init';
@@ -37,10 +36,9 @@ const COLUMN_COUNT = ROW_COUNT;
 
 const main = async (token: IToken) => {
   // Get top artists from Spotify
-  const response = await getTop(token, IMAGE_COUNT);
+  const {data} = await getTop(token, IMAGE_COUNT);
 
-  const images = response
-    .data
+  const images = data
     .items
     .map(({images}) => (
       images
@@ -84,12 +82,12 @@ const main = async (token: IToken) => {
 
 const token = getToken();
 if (token) {
-  removeLink();
   main(token)
     .then()
     .catch(() => {
       removeTokenFromStorage();
+      setLinkVisiblity('visible');
     });
 } else {
-  setLink();
+  setLinkVisiblity('visible');
 }
