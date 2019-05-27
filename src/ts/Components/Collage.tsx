@@ -14,6 +14,7 @@ const style = {
   marginLeft: 'auto',
   marginRight: 'auto',
   display: 'block',
+  maxWidth: '100%',
 };
 
 interface IProps {

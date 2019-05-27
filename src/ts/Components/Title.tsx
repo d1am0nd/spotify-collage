@@ -1,6 +1,7 @@
 import {h, FunctionalComponent} from 'preact';
 
 const style = {
+  marginTop: 0,
   fontSize: '3em',
   lineHeight: '1em',
   letterSpacing: '2px',
