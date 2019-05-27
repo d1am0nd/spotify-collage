@@ -4,6 +4,7 @@ import {btnStyle} from '../styles';
 const style = {
   ...btnStyle,
   width: '320px',
+  backgroundColor: 'lightskyblue',
 };
 
 interface IProps {

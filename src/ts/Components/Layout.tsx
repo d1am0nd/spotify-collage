@@ -2,6 +2,7 @@ import {h, FunctionalComponent} from 'preact';
 import {useState} from 'preact/hooks';
 import {getToken, authLink} from '../init';
 import Title from './Title';
+import Footer from './Footer';
 import SpotifyButton from './SpotifyButton';
 import GenerateButton from './GenerateButton';
 import Emphasis from './Emphasis';
@@ -30,6 +31,7 @@ const Layout: FunctionalComponent = () => {
         Shoutouts to {` `}
         <a href='http://www.tapmusic.net/'>tapmusic.net</a>
       </p>
+
       <div style={{marginTop: '50px'}}>
         {
           token === undefined
@@ -53,6 +55,7 @@ const Layout: FunctionalComponent = () => {
               )
         }
       </div>
+      <Footer />
     </div>
   );
 }
