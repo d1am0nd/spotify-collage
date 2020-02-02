@@ -1,14 +1,14 @@
 import {h, FunctionalComponent} from 'preact';
+import styled from 'styled-components';
 
-const style = {
-  position: 'fixed',
-  bottom: '10px',
-};
+const Wrapper = styled.div`
+  margin-top: 25px;
+`;
 
 const Footer: FunctionalComponent = () => (
-  <div style={style}>
-    Made by <a href="https://kordes.dev">Dev Kordes</a>
-  </div>
+  <Wrapper>
+    Made by <a target='_blank' href='https://kordes.dev'>Dev Kordes</a>
+  </Wrapper>
 );
 
 export default Footer;

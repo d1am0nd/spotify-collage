@@ -1,13 +1,9 @@
-import {h, FunctionalComponent} from 'preact';
+import styled from 'styled-components';
 
-const style = {
-  fontWeight: 200,
-  marginTop: '1.5em',
-  fontSize: '1.7em',
-};
-
-const Emphasis: FunctionalComponent = ({children}) => (
-  <p style={style}>{children}</p>
-);
+const Emphasis = styled.p`
+  font-weight: 200;
+  margin-top: 1.5em;
+  font-size: 1.7em;
+`;
 
 export default Emphasis;

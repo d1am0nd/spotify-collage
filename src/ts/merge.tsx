@@ -10,7 +10,8 @@ interface IOptions {
 };
 
 export async function* asyncImageIterator(
-  images: Array<IImage>
+  images: Array<IImage>,
+  timePerImage: number
 ): AsyncIterable<[number, HTMLImageElement]> {
   for (let [i, image] of images.entries()) {
     yield await new Promise((res, rej) => {
@@ -18,7 +19,7 @@ export async function* asyncImageIterator(
       img.crossOrigin = 'anonymous';
       img.onerror = () => rej(new Error('Couldn\'t load image'));
       img.onload = () => {
-        setTimeout(() => res([i, img]), 100);
+        setTimeout(() => res([i, img]), timePerImage);
       };
       img.src = image.src;
     });

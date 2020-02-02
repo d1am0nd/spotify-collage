@@ -29,7 +29,14 @@ export interface IGetTopResults {
   tota: number;
 };
 
-export const getTop = ({accessToken}: IToken, limit: number): AxiosPromise<IGetTopResults> => axios.get(
+export type TimeRange = 'short_term' | 'medium_term' | 'long_term';
+
+interface Params {
+  time_range: TimeRange;
+  limit: number;
+};
+
+export const getTop = ({accessToken}: IToken, limit: number, range: TimeRange): AxiosPromise<IGetTopResults> => axios.get(
   'https://api.spotify.com/v1/me/top/artists',
   {
     headers: {
@@ -37,7 +44,7 @@ export const getTop = ({accessToken}: IToken, limit: number): AxiosPromise<IGetT
     },
     params: {
       limit,
-      time_range: 'short_term',
+      time_range: range,
     },
   }
 );
