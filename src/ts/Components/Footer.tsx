@@ -7,7 +7,7 @@ const Wrapper = styled.div`
 
 const Footer: FunctionalComponent = () => (
   <Wrapper>
-    Made by <a target='_blank' href='https://kordes.dev'>Dev Kordes</a>
+    Made by <a rel='noopener' target='_blank' href='https://kordes.dev'>Dev Kordes</a>
   </Wrapper>
 );
 

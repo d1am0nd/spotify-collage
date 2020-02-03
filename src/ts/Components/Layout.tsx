@@ -30,9 +30,7 @@ const Ul = styled.ul`
 const Li = styled.li`
   text-transform: uppercase;
   display: table-cell;
-  textAlign: center;
   padding: 16px;
-  textDecoration: none;
   margin: auto;
   width: 100%;
   cursor: pointer;
@@ -43,13 +41,8 @@ const Li = styled.li`
   height: 100%;
   background-color: ${
     ({selected}: {selected: boolean}) => selected
-      ? '#1db954'
+      ? '#4FE383'
       : 'inherit'
-  };
-  color: ${
-    ({selected}: {selected: boolean}) => selected
-      ? 'white'
-      : 'black'
   };
 `;
 
@@ -88,7 +81,7 @@ const Layout: FunctionalComponent = () => {
       </Emphasis>
       <Shoutouts>
         Shoutouts to {` `}
-        <a target='_blank' href='http://www.tapmusic.net/'>tapmusic.net</a>
+        <a rel='noopener' target='_blank' href='http://www.tapmusic.net/'>tapmusic.net</a>
       </Shoutouts>
       <Ul>
         {[...sizeMap.keys()].map((currSize) => (

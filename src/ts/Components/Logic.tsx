@@ -39,9 +39,8 @@ const GenerateButton = styled(Button)`
 `;
 
 const SpotifyButton = styled(Button)`
-  border-color: #1aa34a;
-  color: #fff;
-  background-color: #1db954;
+  border-color: #22C35B;
+  background-color: #4FE383;
 `;
 
 interface IProps {
