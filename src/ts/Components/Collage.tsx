@@ -15,14 +15,12 @@ const GENERATION_LENGTH = 900;
 const extractImages = (imgHeight: number, imgWidth: number) => (
   {images}: IArtist
 ) => {
-  const reversed = images.reverse();
-
-  return reversed
+  return images
+    .reverse()
     .find(({height, width}) => (
       height >= imgHeight
       && width >= imgWidth
-    ))
-    || reversed[0];
+    ));
 };
 
 const mapImage = (
@@ -65,6 +63,7 @@ const Collage: FunctionalComponent<IProps> = ({
   const ctx = canvas.getContext('2d');
   const images = artists
     .map(extractImages(singleImgSize, singleImgSize))
+    .filter((img) => !!img)
     .map(mapImage(imgCount, imgCount, singleImgSize, singleImgSize));
 
   useEffect(() => {
