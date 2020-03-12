@@ -14,12 +14,16 @@ const GENERATION_LENGTH = 900;
 
 const extractImages = (imgHeight: number, imgWidth: number) => (
   {images}: IArtist
-) => images
-  .reverse()
-  .find(({height, width}) => (
-    height >= imgHeight
-    && width >= imgWidth
-  ));
+) => {
+  const reversed = images.reverse();
+
+  return reversed
+    .find(({height, width}) => (
+      height >= imgHeight
+      && width >= imgWidth
+    ))
+    || reversed[0];
+};
 
 const mapImage = (
   colCount: number,
